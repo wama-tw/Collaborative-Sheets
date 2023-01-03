@@ -8,7 +8,7 @@
 #include "../Controllers/SheetController.hpp"
 #include "../Controllers/UserController.hpp"
 #include "../Database.hpp"
-#include "../Library/exprtk.hpp"
+#include "../Libraries/exprtk.hpp"
 #include "../Models/Relation.hpp"
 #include "../Models/Sheet.hpp"
 #include "../Models/User.hpp"
