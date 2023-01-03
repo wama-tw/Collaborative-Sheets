@@ -1,0 +1,1 @@
+g++ Main.cpp Views/*.cpp Models/*.cpp Database.cpp Controllers/*.cpp -o FinalProject.out

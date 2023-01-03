@@ -4,7 +4,9 @@
 #include <iostream>
 #include <vector>
 
-#include "models.hpp"
+#include "Models/Relation.hpp"
+#include "Models/Sheet.hpp"
+#include "Models/User.hpp"
 
 extern std::vector<User *> UserTable;
 extern std::vector<Sheet *> SheetTable;
