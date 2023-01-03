@@ -1,0 +1,125 @@
+---------------Menu---------------
+1. Create a user
+2. Create a sheet
+3. Check a sheet
+4. Change a value in a sheet
+5. Change a sheet's access right.
+6. Collaborate with an other user
+----------------------------------
+> 1
+> Kevin
+Create a user named "Kevin".
+
+---------------Menu---------------
+1. Create a user
+2. Create a sheet
+3. Check a sheet
+4. Change a value in a sheet
+5. Change a sheet's access right.
+6. Collaborate with an other user
+----------------------------------
+> 2
+> Kevin SheetA
+Create a sheet named "SheetA" for "Kevin".
+
+---------------Menu---------------
+1. Create a user
+2. Create a sheet
+3. Check a sheet
+4. Change a value in a sheet
+5. Change a sheet's access right.
+6. Collaborate with an other user
+----------------------------------
+> 3
+> Kevin SheetA
+
+0, 0, 0,
+0, 0, 0,
+0, 0, 0,
+
+---------------Menu---------------
+1. Create a user
+2. Create a sheet
+3. Check a sheet
+4. Change a value in a sheet
+5. Change a sheet's access right.
+6. Collaborate with an other user
+----------------------------------
+> 4
+> Kevin SheetA
+
+0, 0, 0,
+0, 0, 0,
+0, 0, 0,
+
+> 1 2 3
+
+0, 0, 0,
+0, 0, 3,
+0, 0, 0,
+
+---------------Menu---------------
+1. Create a user
+2. Create a sheet
+3. Check a sheet
+4. Change a value in a sheet
+5. Change a sheet's access right.
+6. Collaborate with an other user
+----------------------------------
+> 4
+> Kevin SheetA
+
+0, 0, 0,
+0, 0, 0,
+0, 0, 0,
+
+> 1 2 1.5+2
+
+0, 0, 0,
+0, 0, 3.5,
+0, 0, 0,
+
+---------------Menu---------------
+1. Create a user.
+2. Create a sheet.
+3. Check a sheet.
+4. Change a value in a sheet.
+5. Change a sheet's access right.
+6. Collaborate with an other user.
+----------------------------------
+> 5
+> Kevin SheetA ReadOnly
+
+---------------Menu---------------
+1. Create a user.
+2. Create a sheet.
+3. Check a sheet.
+4. Change a value in a sheet.
+5. Change a sheet's access right.
+6. Collaborate with an other user.
+----------------------------------
+> 4
+> Kevin SheetA
+
+0, 0, 0,
+0, 0, 3,
+0, 0, 0,
+
+> 1 2 2
+This sheet is not accessible.
+
+0, 0, 0,
+0, 0, 3,
+0, 0, 0,
+
+---------------Menu---------------
+1. Create a user
+2. Create a sheet
+3. Check a sheet
+4. Change a value in a sheet
+5. Change a sheet's access right.
+6. Collaborate with an other user
+----------------------------------
+> 6
+> Kevin SheetA Ray
+Share "Kevin"'s "SheetA" with "Ray".
