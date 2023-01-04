@@ -1,10 +1,13 @@
 #include "Sheet.hpp"
 
 #include <iostream>
+#include <vector>
 
 #include "../Database.hpp"
 
-Sheet::Sheet(std::string name) {
+using namespace std;
+
+Sheet::Sheet(string name) {
   this->name = name;
   this->accessRights = "Editable";
   this->sheetContent = new float *[3];
@@ -17,11 +20,11 @@ Sheet::Sheet(std::string name) {
   SheetTable.push_back(this);
 }
 
-std::string Sheet::getName() {
+string Sheet::getName() {
   return this->name;
 }
 
-std::string Sheet::getAccessRights() {
+string Sheet::getAccessRights() {
   return this->accessRights;
 }
 
@@ -33,11 +36,11 @@ void Sheet::setSheetContent(int row, int col, float newValue) {
   (this->sheetContent)[row][col] = newValue;
 }
 
-void Sheet::setAccessRights(std::string newAccessRights) {
+void Sheet::setAccessRights(string newAccessRights) {
   this->accessRights = newAccessRights;
 }
 
-Sheet *getSheetByName(std::string name) {
+Sheet *getSheetByName(string name) {
   for (int i = 0; i < SheetTable.size(); i++) {
     if (SheetTable[i]->getName() == name) {
       return SheetTable[i];

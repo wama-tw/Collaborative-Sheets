@@ -22,14 +22,13 @@ void SheetController::create() {
   }
 
   bool alreadyExists = true;
-  vector<User *> users = getUsersHaveAccessToSheet(sheetName);
-  for (int i = 0; i < users.size(); i++) {
-    if (users[i]->getName() == creator->getName()) {
-      return printCreateSheet(sheetName, creatorName, alreadyExists);
-    }
+  Sheet *oldSheet = getSheetByName(sheetName);
+  if (oldSheet != NULL) {
+    return printCreateSheet(sheetName, creatorName, alreadyExists);
   }
+
   Sheet *newSheet = new Sheet(sheetName);
-  Relation(creator, newSheet);
+  new Relation(creator, newSheet);
 
   return printCreateSheet(sheetName, creatorName, (!alreadyExists));
 }
@@ -80,7 +79,8 @@ void SheetController::changeValue() {
     return printChangeValueInSheetError((!isInRightPosition), isAccessible);
   }
   if (sheet->getAccessRights() != "Editable") {
-    return printChangeValueInSheetError(isInRightPosition, (!isAccessible));
+    printChangeValueInSheetError(isInRightPosition, (!isAccessible));
+    return printContent(sheet->getContent());
   }
 
   sheet->setSheetContent(row, col, newValue);
@@ -127,7 +127,7 @@ void SheetController::collaborateWithUser() {
     return printUserDontHaveAccessToSheet(sharerName, sheetName);
   }
 
-  Relation(newEditor, sheet);
+  new Relation(newEditor, sheet);
 
   return printCollaborateWithUser(sharerName, sheetName, newEditorName);
 }

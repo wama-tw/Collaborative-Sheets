@@ -7,9 +7,11 @@
 #include "../Models/Sheet.hpp"
 #include "../Models/User.hpp"
 
+using namespace std;
+
 class SheetController {
  private:
-  float evaluate(std::string expression_string);
+  float evaluate(string expression_string);
 
  public:
   void create();

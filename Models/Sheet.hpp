@@ -3,21 +3,23 @@
 
 #include <iostream>
 
+using namespace std;
+
 class Sheet {
  private:
-  std::string name;
-  std::string accessRights;  // "Editable" or "ReadOnly"
+  string name;
+  string accessRights;  // "Editable" or "ReadOnly"
   float **sheetContent;
 
  public:
-  Sheet(std::string name);
-  std::string getName();
-  std::string getAccessRights();
+  Sheet(string name);
+  string getName();
+  string getAccessRights();
   float **getContent();
   void setSheetContent(int row, int col, float newValue);
-  void setAccessRights(std::string newAccessRights);
+  void setAccessRights(string newAccessRights);
 };
 
-Sheet *getSheetByName(std::string name);
+Sheet *getSheetByName(string name);
 
 #endif

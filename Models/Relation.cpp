@@ -5,6 +5,8 @@
 
 #include "../Database.hpp"
 
+using namespace std;
+
 Relation::Relation(User *user, Sheet *sheet) {
   this->editor = user;
   this->sheet = sheet;
@@ -29,8 +31,8 @@ bool hasAccessTo(User *user, Sheet *sheet) {
   return false;
 }
 
-std::vector<Sheet *> getSheetsAccessibleByUser(std::string username) {
-  std::vector<Sheet *> result;
+vector<Sheet *> getSheetsAccessibleByUser(string username) {
+  vector<Sheet *> result;
   for (int i = 0; i < RelationTable.size(); i++) {
     if (RelationTable[i]->getEditor()->getName() == username) {
       result.push_back(RelationTable[i]->getSheet());
@@ -39,8 +41,8 @@ std::vector<Sheet *> getSheetsAccessibleByUser(std::string username) {
   return result;
 }
 
-std::vector<User *> getUsersHaveAccessToSheet(std::string sheetName) {
-  std::vector<User *> result;
+vector<User *> getUsersHaveAccessToSheet(string sheetName) {
+  vector<User *> result;
   for (int i = 0; i < RelationTable.size(); i++) {
     if (RelationTable[i]->getSheet()->getName() == sheetName) {
       result.push_back(RelationTable[i]->getEditor());

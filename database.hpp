@@ -8,8 +8,10 @@
 #include "Models/Sheet.hpp"
 #include "Models/User.hpp"
 
-extern std::vector<User *> UserTable;
-extern std::vector<Sheet *> SheetTable;
-extern std::vector<Relation *> RelationTable;
+using namespace std;
+
+extern vector<User *> UserTable;
+extern vector<Sheet *> SheetTable;
+extern vector<Relation *> RelationTable;
 
 #endif

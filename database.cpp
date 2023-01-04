@@ -1,5 +1,9 @@
 #include "Database.hpp"
 
-std::vector<User *> UserTable;
-std::vector<Sheet *> SheetTable;
-std::vector<Relation *> RelationTable;
+#include <vector>
+
+using namespace std;
+
+vector<User *> UserTable;
+vector<Sheet *> SheetTable;
+vector<Relation *> RelationTable;

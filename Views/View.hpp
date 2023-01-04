@@ -8,7 +8,7 @@
 using namespace std;
 
 void printMenu(bool ChangeAccessRight, bool Collaborate);
-void printCreateUser(string newUserName);
+void printCreateUser(string newUserName, bool alreadyExists);
 void printCreateSheet(string newSheetName, string creatorName, bool alreadyExists);
 void printChangeValueInSheetError(bool isInRightPosition, bool isAccessible);
 void printWrongRightAccessType(string newAccessRight);

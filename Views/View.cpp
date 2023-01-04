@@ -20,15 +20,19 @@ void printMenu(bool ChangeAccessRight, bool Collaborate) {
   cout << "> ";
 }
 
-void printCreateUser(string newUserName) {
-  cout << "Create a user named \"" << newUserName << "\"." << endl;
-  return;
+void printCreateUser(string newUserName, bool alreadyExists) {
+  if (alreadyExists) {
+    cout << "User \"" << newUserName << "\" already exist." << endl;
+    cout << "User name must be unique." << endl;
+  } else
+    cout << "Create a user named \"" << newUserName << "\"." << endl;
 }
 
 void printCreateSheet(string newSheetName, string creatorName, bool alreadyExists) {
-  if (alreadyExists)
+  if (alreadyExists) {
     cout << "Sheet \"" << newSheetName << "\" already exist." << endl;
-  else
+    cout << "Sheet name must be unique." << endl;
+  } else
     cout << "Create a sheet named \"" << newSheetName << "\" for \"" << creatorName << "\"." << endl;
 }
 

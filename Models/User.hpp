@@ -4,15 +4,17 @@
 #include <iostream>
 #include <vector>
 
+using namespace std;
+
 class User {
  private:
-  std::string name;
+  string name;
 
  public:
-  User(std::string name);
-  std::string getName();
+  User(string name);
+  string getName();
 };
 
-User *getUserByName(std::string name);
+User *getUserByName(string name);
 
 #endif

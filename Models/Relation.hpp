@@ -2,9 +2,12 @@
 #define RELATION_MODELS_H
 
 #include <iostream>
+#include <vector>
 
 #include "Sheet.hpp"
 #include "User.hpp"
+
+using namespace std;
 
 class Relation {
  private:
@@ -18,7 +21,7 @@ class Relation {
 };
 
 bool hasAccessTo(User *user, Sheet *sheet);
-std::vector<Sheet *> getSheetsAccessibleByUser(std::string username);
-std::vector<User *> getUsersHaveAccessToSheet(std::string sheetName);
+vector<Sheet *> getSheetsAccessibleByUser(string username);
+vector<User *> getUsersHaveAccessToSheet(string sheetName);
 
 #endif
