@@ -11,12 +11,12 @@ using namespace std;
 int getInputChoice();
 
 int main() {
-  bool ChangeAccessRight = true;
-  bool Collaborate = true;
+  bool canChangeAccessRights = true;
+  bool canCollaborate = true;
   UserController userController;
   SheetController sheetController;
   while (true) {
-    printMenu(ChangeAccessRight, Collaborate);
+    printMenu(canChangeAccessRights, canCollaborate);
     switch (getInputChoice()) {
       case 1:
         userController.create();
@@ -31,13 +31,13 @@ int main() {
         sheetController.changeValue();
         break;
       case 5:
-        if (ChangeAccessRight)
+        if (canChangeAccessRights)
           sheetController.changeAccessRights();
         else
           cout << "Unknown choice." << endl;
         break;
       case 6:
-        if (Collaborate)
+        if (canCollaborate)
           sheetController.collaborateWithUser();
         else
           cout << "Unknown choice." << endl;

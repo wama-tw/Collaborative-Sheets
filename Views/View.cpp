@@ -6,15 +6,15 @@
 
 using namespace std;
 
-void printMenu(bool ChangeAccessRight, bool Collaborate) {
+void printMenu(bool canChangeAccessRights, bool canCollaborate) {
   cout << "---------------Menu---------------" << endl;
   cout << "1. Create a user" << endl;
   cout << "2. Create a sheet" << endl;
   cout << "3. Check a sheet" << endl;
   cout << "4. Change a value in a sheet" << endl;
-  if (ChangeAccessRight)
+  if (canChangeAccessRights)
     cout << "5. Change a sheet's access right." << endl;
-  if (Collaborate)
+  if (canCollaborate)
     cout << "6. Collaborate with an other user" << endl;
   cout << "----------------------------------" << endl;
   cout << "> ";
