@@ -6,4 +6,4 @@ using namespace std;
 
 vector<User *> UserTable;
 vector<Sheet *> SheetTable;
-vector<Relation *> RelationTable;
+vector<UserSheetRelation *> UserSheetRelationTable;

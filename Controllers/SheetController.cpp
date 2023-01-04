@@ -5,9 +5,9 @@
 #include <vector>
 
 #include "../Libraries/exprtk.hpp"
-#include "../Models/Relation.hpp"
 #include "../Models/Sheet.hpp"
 #include "../Models/User.hpp"
+#include "../Models/UserSheetRelation.hpp"
 #include "../Views/View.hpp"
 
 using namespace std;
@@ -28,7 +28,7 @@ void SheetController::create() {
   }
 
   Sheet *newSheet = new Sheet(sheetName);
-  new Relation(creator, newSheet);
+  new UserSheetRelation(creator, newSheet);
 
   return printCreateSheet(sheetName, creatorName, (!alreadyExists));
 }
@@ -127,7 +127,7 @@ void SheetController::collaborateWithUser() {
     return printUserDontHaveAccessToSheet(sharerName, sheetName);
   }
 
-  new Relation(newEditor, sheet);
+  new UserSheetRelation(newEditor, sheet);
 
   return printCollaborateWithUser(sharerName, sheetName, newEditorName);
 }
