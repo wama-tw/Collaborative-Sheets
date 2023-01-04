@@ -17,4 +17,8 @@ class Relation {
   Sheet *getSheet();
 };
 
+bool hasAccessTo(User *user, Sheet *sheet);
+std::vector<Sheet *> getSheetsAccessibleByUser(std::string username);
+std::vector<User *> getUsersHaveAccessToSheet(std::string sheetName);
+
 #endif

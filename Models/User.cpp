@@ -12,3 +12,12 @@ User::User(std::string name) {
 std::string User::getName() {
   return this->name;
 }
+
+User *getUserByName(std::string name) {
+  for (int i = 0; i < UserTable.size(); i++) {
+    if (UserTable[i]->getName() == name) {
+      return UserTable[i];
+    }
+  }
+  return NULL;
+}

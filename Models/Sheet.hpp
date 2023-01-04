@@ -18,4 +18,6 @@ class Sheet {
   void setAccessRights(std::string newAccessRights);
 };
 
+Sheet *getSheetByName(std::string name);
+
 #endif

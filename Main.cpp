@@ -8,6 +8,8 @@
 
 using namespace std;
 
+int getInputChoice();
+
 int main() {
   bool ChangeAccessRight = true;
   bool Collaborate = true;
@@ -17,30 +19,28 @@ int main() {
     printMenu(ChangeAccessRight, Collaborate);
     switch (getInputChoice()) {
       case 1:
-        printCreateUser(userController);
+        userController.create();
         break;
       case 2:
-        printCreateSheet(userController, sheetController);
+        sheetController.create();
         break;
       case 3:
-        printCheckSheet(userController, sheetController);
+        sheetController.check();
         break;
       case 4:
-        printChangeValueInSheet(userController, sheetController);
+        sheetController.changeValue();
         break;
       case 5:
-        if (ChangeAccessRight) {
-          printChangeAccessRight(userController, sheetController);
-        } else {
+        if (ChangeAccessRight)
+          sheetController.changeAccessRights();
+        else
           cout << "Unknown choice." << endl;
-        }
         break;
       case 6:
-        if (Collaborate) {
-          printCollaborateWithUser(userController, sheetController);
-        } else {
+        if (Collaborate)
+          sheetController.collaborateWithUser();
+        else
           cout << "Unknown choice." << endl;
-        }
         break;
       default:
         cout << "Unknown choice." << endl;
@@ -48,4 +48,13 @@ int main() {
     }
     cout << endl;
   }
+}
+
+int getInputChoice() {
+  string input;
+  cin >> input;
+  if ((input.length() != 1) || (input[0] < '0' || input[0] > '9')) {
+    return (-1);
+  }
+  return (input[0] - '0');
 }

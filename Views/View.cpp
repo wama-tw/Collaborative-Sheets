@@ -4,24 +4,7 @@
 #include <utility>
 #include <vector>
 
-#include "../Controllers/RelationController.hpp"
-#include "../Controllers/SheetController.hpp"
-#include "../Controllers/UserController.hpp"
-#include "../Database.hpp"
-#include "../Libraries/exprtk.hpp"
-#include "../Models/Relation.hpp"
-#include "../Models/Sheet.hpp"
-#include "../Models/User.hpp"
 using namespace std;
-
-int getInputChoice() {
-  string input;
-  cin >> input;
-  if ((input.length() != 1) || (input[0] < '0' || input[0] > '9')) {
-    return (-1);
-  }
-  return (input[0] - '0');
-}
 
 void printMenu(bool ChangeAccessRight, bool Collaborate) {
   cout << "---------------Menu---------------" << endl;
@@ -37,129 +20,38 @@ void printMenu(bool ChangeAccessRight, bool Collaborate) {
   cout << "> ";
 }
 
-User *printCreateUser(UserController userController) {
-  cout << "> ";
-  string newUserName;
-  cin >> newUserName;
-  User *newUser = userController.create(newUserName);
-  cout << "Create a user named \"" << newUser->getName() << "\"." << endl;
-  return newUser;
+void printCreateUser(string newUserName) {
+  cout << "Create a user named \"" << newUserName << "\"." << endl;
+  return;
 }
 
-Sheet *printCreateSheet(UserController userController, SheetController sheetController) {
-  cout << "> ";
-  string creatorName, sheetName;
-  cin >> creatorName >> sheetName;
-  User *creator = userController.getUserByName(creatorName);
-  if (!(isExist(creator, "User", creatorName))) {
-    return NULL;
-  }
-
-  Sheet *newSheet = sheetController.create(sheetName, creator);
-  if (newSheet == NULL) {
-    cout << "Sheet \"" << sheetName << "\" already exist." << endl;
-    return NULL;
-  }
-  cout << "Create a sheet named \"" << newSheet->getName() << "\" for \"" << creator->getName() << "\"." << endl;
-  return newSheet;
+void printCreateSheet(string newSheetName, string creatorName, bool alreadyExists) {
+  if (alreadyExists)
+    cout << "Sheet \"" << newSheetName << "\" already exist." << endl;
+  else
+    cout << "Create a sheet named \"" << newSheetName << "\" for \"" << creatorName << "\"." << endl;
 }
 
-pair<User *, Sheet *> printCheckSheet(UserController userController, SheetController sheetController) {
-  cout << "> ";
-  string userName, sheetName;
-  cin >> userName >> sheetName;
-  User *user = userController.getUserByName(userName);
-  Sheet *sheet = sheetController.getSheetByName(sheetName);
-  if (!(isExist(user, "User", userName) &&
-        isExist(sheet, "Sheet", sheetName))) {
-    return make_pair(user, sheet);
-  }
-  float **sheetContent = sheetController.check(user, sheet);
-  if (sheetContent == NULL) {
-    cout << "\"" << user->getName() << "\" don't have access to sheet \""
-         << sheet->getName() << "\"." << endl;
-    sheet = NULL;
-    return make_pair(user, sheet);
-  }
-  printContent(sheetContent);
-  return make_pair(user, sheet);
-}
-
-pair<User *, Sheet *> printChangeValueInSheet(UserController userController, SheetController sheetController) {
-  pair<User *, Sheet *> operation = printCheckSheet(userController, sheetController);
-  if (operation.first == NULL || operation.second == NULL) {
-    return operation;
-  }
-  User *user = operation.first;
-  Sheet *sheet = operation.second;
-
-  cout << endl
-       << "> ";
-  int row, col;
-  string inputValue;
-  cin >> row >> col >> inputValue;
-  float newValue = evaluate(inputValue);
-  if (row > 3 || row < 0 || col > 3 || col < 0) {
+void printChangeValueInSheetError(bool isInRightPosition, bool isAccessible) {
+  if (!isInRightPosition)
     cout << "Invalid position (0-2)" << endl;
-    return make_pair(user, sheet);
-  }
-  string result = sheetController.changeValue(user, sheet, row, col, newValue);
-  if (result == "userDenied") {  // not executed
-    cout << "\"" << user->getName() << "\" don't have access to sheet \"" << sheet->getName() << "\"." << endl;
-    sheet = NULL;
-    return make_pair(user, sheet);
-  }
-  if (result == "accessRightDenied") {
+  else if (!isAccessible)
     cout << "This sheet is not accessible." << endl;
-  }
-
-  printContent(sheetController.check(user, sheet));
-
-  return operation;
 }
 
-void printChangeAccessRight(UserController userController, SheetController sheetController) {
-  cout << "> ";
-  string userName, sheetName, newAccessRight;
-  cin >> userName >> sheetName >> newAccessRight;
-  User *user = userController.getUserByName(userName);
-  Sheet *sheet = sheetController.getSheetByName(sheetName);
-  if (!(isExist(user, "User", userName) &&
-        isExist(sheet, "Sheet", sheetName))) {
-    return;
-  }
-  string result = sheetController.changeAccessRights(user, sheet, newAccessRight);
-
-  if (result == "userDenied") {
-    cout << "\"" << user->getName() << "\" don't have access to sheet \"" << sheet->getName() << "\"." << endl;
-  } else if (result == "accessRightTypeDenied") {
-    cout << "There is no access right named \"" << newAccessRight << "\"." << endl;
-    cout << "Please use \"Editable\" or \"ReadOnly\"" << endl;
-  }
-  return;
+void printWrongRightAccessType(string newAccessRight) {
+  cout << "There is no access right named \"" << newAccessRight << "\"." << endl;
+  cout << "Please use \"Editable\" or \"ReadOnly\"" << endl;
 }
 
-void printCollaborateWithUser(UserController userController, SheetController sheetController) {
-  cout << "> ";
-  string sharerName, sheetName, newEditorName;
-  cin >> sharerName >> sheetName >> newEditorName;
-  User *sharer = userController.getUserByName(sharerName);
-  User *newEditor = userController.getUserByName(newEditorName);
-  Sheet *sheet = sheetController.getSheetByName(sheetName);
-  if (!(isExist(sharer, "User", sharerName) &&
-        isExist(newEditor, "User", newEditorName) &&
-        isExist(sheet, "Sheet", sheetName))) {
-    return;
-  }
-  string result = sheetController.collaborateWithUser(sharer, sheet, newEditor);
+void printCollaborateWithUser(string sharerName, string sheetName, string newEditorName) {
+  cout << "Share \"" << sharerName << "\"'s \"" << sheetName
+       << "\" with \"" << newEditorName << "\"." << endl;
+}
 
-  if (result == "userDenied") {
-    cout << "\"" << sharer->getName() << "\" don't have access to sheet \"" << sheet->getName() << "\"." << endl;
-  } else if (result == "") {
-    cout << "Share \"" << sharerName << "\"'s \"" << sheetName
-         << "\" with \"" << newEditorName << "\"." << endl;
-  }
-  return;
+void printUserDontHaveAccessToSheet(string userName, string sheetName) {
+  cout << "\"" << userName << "\" don't have access to sheet \""
+       << sheetName << "\"." << endl;
 }
 
 void printContent(float **sheetContent) {
@@ -170,22 +62,6 @@ void printContent(float **sheetContent) {
     }
     cout << endl;
   }
-}
-
-float evaluate(string expression_string) {
-  typedef exprtk::expression<double> expression_t;
-  typedef exprtk::parser<double> parser_t;
-
-  expression_t expression;
-
-  parser_t parser;
-
-  if (parser.compile(expression_string, expression)) {
-    return expression.value();
-  } else
-    printf("Error in expression.\n");
-
-  return 0;
 }
 
 bool isExist(void *object, string type, string name) {

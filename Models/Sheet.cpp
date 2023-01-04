@@ -36,3 +36,12 @@ void Sheet::setSheetContent(int row, int col, float newValue) {
 void Sheet::setAccessRights(std::string newAccessRights) {
   this->accessRights = newAccessRights;
 }
+
+Sheet *getSheetByName(std::string name) {
+  for (int i = 0; i < SheetTable.size(); i++) {
+    if (SheetTable[i]->getName() == name) {
+      return SheetTable[i];
+    }
+  }
+  return NULL;
+}

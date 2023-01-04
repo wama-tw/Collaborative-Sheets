@@ -2,6 +2,7 @@
 #define USER_MODELS_H
 
 #include <iostream>
+#include <vector>
 
 class User {
  private:
@@ -11,5 +12,7 @@ class User {
   User(std::string name);
   std::string getName();
 };
+
+User *getUserByName(std::string name);
 
 #endif
