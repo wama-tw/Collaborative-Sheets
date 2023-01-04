@@ -14,6 +14,7 @@
 
 using namespace std;
 
+int getInputChoice();
 void printMenu(bool ChangeAccessRight, bool Collaborate);
 User *printCreateUser(UserController userController);
 Sheet *printCreateSheet(UserController userController, SheetController sheetController);

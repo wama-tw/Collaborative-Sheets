@@ -14,6 +14,15 @@
 #include "../Models/User.hpp"
 using namespace std;
 
+int getInputChoice() {
+  string input;
+  cin >> input;
+  if ((input.length() != 1) || (input[0] < '0' || input[0] > '9')) {
+    return (-1);
+  }
+  return (input[0] - '0');
+}
+
 void printMenu(bool ChangeAccessRight, bool Collaborate) {
   cout << "---------------Menu---------------" << endl;
   cout << "1. Create a user" << endl;
