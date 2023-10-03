@@ -1,3 +1,5 @@
+此專案的詳細介紹請看 [介紹的 PDF](https://github.com/wama-tw/Collaborative-Sheets/blob/main/FinalProject.pdf)
+
 ## 編譯
 
 可以使用 makefile.sh 來編譯（用 g++）
